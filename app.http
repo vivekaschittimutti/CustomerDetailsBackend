@@ -1,0 +1,32 @@
+GET http://localhost:3000/customer
+
+###
+GET http://localhost:3000/todos/3/
+
+###
+POST http://localhost:3000/customer/
+Content-Type: application/json
+
+{
+  "id": "1",
+  "firstName": "vivek",
+  "lastName": "reddy",
+  "phoneNumber": 6304965782,
+  "email": "vivek@123.com",
+  "address": "Anantapur"
+}
+###
+DELETE http://localhost:3000/customer/1/
+
+###
+PUT http://localhost:3000/customer/1/
+Content-Type: application/json
+
+{
+  "id": "1",
+  "firstName": "vivek",
+  "lastName": "reddy",
+  "phoneNumber": 6304965782,
+  "email": "vivek@123.com",
+  "address": "Tadipatri"
+}
