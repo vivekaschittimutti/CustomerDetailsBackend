@@ -26,55 +26,51 @@ const initializeDBAndServer = async () => {
 
 initializeDBAndServer()
 
-const hasPriorityAndStatusProperties = requestQuery => {
-  return (
-    requestQuery.priority !== undefined && requestQuery.status !== undefined
-  )
-}
-
 app.get('/customer/', async (request, response) => {
-  const getTodoQuery = `
+  const getCustomersQuery = `
   SELECT * FROM customer;`
 
-  const getTodo = await db.all(getTodoQuery)
+  const getCustomers = await db.all(getCustomersQuery)
   response.send({
-    getTodo,
+    getCustomers,
   })
 })
 
-app.get('/todos/:todoId/', async (request, response) => {
-  const {todoId} = request.params
+app.get('/customer/:customerId/', async (request, response) => {
+  const {customerId} = request.params
 
-  const getTodoQuery = `
-  SELECT * FROM todo WHERE id = ${todoId};`
+  const getCustomerQuery = `
+  SELECT * FROM customer WHERE id = ${customerId};`
 
-  const getTodo = await db.get(getTodoQuery)
-  response.send({
-    id: getTodo.id,
-    todo: getTodo.todo,
-    priority: getTodo.priority,
-    status: getTodo.status,
-  })
+  const getCustomer = await db.get(getCustomerQuery)
+  response.send([{
+    id: getCustomer.id,
+    firstName: getCustomer.firstName,
+    lastName: getCustomer.lastName,
+    phoneNumber: getCustomer.phoneNumber,
+    email: getCustomer.email,
+    address: getCustomer.address,
+  }])
 })
 
 app.post('/customer/', async (request, response) => {
   const {id, firstName, lastName, phoneNumber, email, address} = request.body
 
-  const insertTodo = `
+  const insertCustomer = `
         INSERT INTO customer (id,firstName, lastName, phoneNumber, email,address)
         VALUES ('${id}','${firstName}','${lastName}',${phoneNumber},'${email}','${address}');`
-  await db.run(insertTodo)
-  response.send('Todo Successfully Added')
+  await db.run(insertCustomer)
+  response.send('Customer Successfully Added')
 })
 
 app.delete('/customer/:customerId/', async (request, response) => {
   const {customerId} = request.params
 
-  const deleteTodoQuery = `
+  const deleteCustomerQuery = `
   DELETE FROM customer WHERE id = '${customerId}';`
 
-  const deleteTodo = await db.get(deleteTodoQuery)
-  response.send('Todo Deleted')
+  const deleteCustomer = await db.get(deleteCustomerQuery)
+  response.send('Customer Deleted')
 })
 
 app.put('/customer/:customerId/', async (request, response) => {
@@ -86,14 +82,14 @@ app.put('/customer/:customerId/', async (request, response) => {
     email = '',
     address = '',
   } = request.body
-  updateTodosQuery = `
+  updateCustomerQuery = `
       UPDATE customer SET firstName = '${firstName}',lastName = '${lastName}',
     phoneNumber = '${phoneNumber}',
     email = '${email}',
     address = '${address}' WHERE id = '${customerId}';`
-  msg = 'Status Updated'
+  msg = 'CustomerDetails Updated'
 
-  await db.run(updateTodosQuery)
+  await db.run(updateCustomerQuery)
   response.send(msg)
 })
 

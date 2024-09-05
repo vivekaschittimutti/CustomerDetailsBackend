@@ -1,14 +1,14 @@
 GET http://localhost:3000/customer
 
 ###
-GET http://localhost:3000/todos/3/
+GET http://localhost:3000/customer/2/
 
 ###
 POST http://localhost:3000/customer/
 Content-Type: application/json
 
 {
-  "id": "1",
+  "id": "2",
   "firstName": "vivek",
   "lastName": "reddy",
   "phoneNumber": 6304965782,
