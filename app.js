@@ -43,14 +43,16 @@ app.get('/customer/:customerId/', async (request, response) => {
   SELECT * FROM customer WHERE id = ${customerId};`
 
   const getCustomer = await db.get(getCustomerQuery)
-  response.send([{
-    id: getCustomer.id,
-    firstName: getCustomer.firstName,
-    lastName: getCustomer.lastName,
-    phoneNumber: getCustomer.phoneNumber,
-    email: getCustomer.email,
-    address: getCustomer.address,
-  }])
+  response.send([
+    {
+      id: getCustomer.id,
+      firstName: getCustomer.firstName,
+      lastName: getCustomer.lastName,
+      phoneNumber: getCustomer.phoneNumber,
+      email: getCustomer.email,
+      address: getCustomer.address,
+    },
+  ])
 })
 
 app.post('/customer/', async (request, response) => {
