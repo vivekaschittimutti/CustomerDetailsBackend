@@ -5,7 +5,7 @@ const {open} = require('sqlite')
 const sqlite3 = require('sqlite3')
 const app = express()
 app.use(express.json())
-app.use(cors());
+app.use(cors({ origin: 'https://chittimuttivivekanandhareddykkzrcrjscp4wkcf.drops.nxtwave.tech' }));
 const dbPath = path.join(__dirname, 'customerDetails.db')
 
 let db = null
